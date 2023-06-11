@@ -9,6 +9,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 
 import { AppRoutingModule } from './app-routing.module';
+import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -27,6 +28,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     NgbModule,
     FormsModule,
     FontAwesomeModule,
+    RouterModule.forRoot([
+      { path: 'crud-operation/:id', component: CrudOperationComponent },
+    ]),
   ],
   providers: [DesignationService, EmployeeService],
   bootstrap: [AppComponent],

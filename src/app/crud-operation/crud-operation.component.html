@@ -7,7 +7,7 @@
           <label for="name">Name</label>
           <input
             #name="ngModel"
-            ngModel
+            [(ngModel)]="employee.name"
             name="name"
             id="name"
             type="text"
@@ -22,7 +22,7 @@
           <label for="category">Designation</label>
           <select
             #designation="ngModel"
-            ngModel
+            [(ngModel)]="employee.designation"
             name="designation"
             id="designation"
             class="form-select"
@@ -46,7 +46,7 @@
           <label for="salary">Salary</label>
           <input
             #salary="ngModel"
-            ngModel
+            [(ngModel)]="employee.salary"
             name="salary"
             id="salary"
             type="number"
@@ -80,15 +80,17 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let p of employees$ | async">
+            <tr *ngFor="let p of employees$ | async; index as i">
               <td>{{ p.name }}</td>
               <td>{{ p.designation }}</td>
               <td>{{ p.salary }}</td>
               <td>
-                <a [routerLink]="['/', p.$key]"
+                <a
+                  (click)="onEditEmployee(p.key)"
+                  [routerLink]="['/crud-operation/', p.key]"
                   ><fa-icon [icon]="faPenSquare" class="faPenSquare"></fa-icon
                 ></a>
-                <a [routerLink]="['/', p.$key]"
+                <a [routerLink]="['/', p.key]"
                   ><fa-icon [icon]="faTrashCan" class="faTrashCan"></fa-icon
                 ></a>
               </td>
