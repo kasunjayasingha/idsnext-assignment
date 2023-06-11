@@ -52,5 +52,17 @@
 }
 
 .paddingbotton {
-  padding-bottom: 90px;
+  width: auto;
+  height: 330px;
+  overflow: auto;
+  overflow-x: hidden;
+  padding-bottom: 50px;
+}
+
+.paddingbotton::-webkit-scrollbar {
+  display: none;
+}
+
+.border {
+  border-radius: 0;
 }
