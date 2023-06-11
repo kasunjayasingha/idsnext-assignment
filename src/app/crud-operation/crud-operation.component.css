@@ -1,0 +1,56 @@
+.btnSave {
+  margin-top: 20px;
+  padding: 8px 60px;
+}
+
+.bgcolor {
+  background-color: #ffffff;
+}
+
+.btngroup {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.btn-outline-primary {
+  margin-right: 30px;
+  color: #f28d44;
+  border: 1px solid #f28d44;
+}
+
+.btn-primary {
+  color: #ffffff;
+  background-color: #f28d44;
+  border: 1px solid #f28d44;
+}
+
+.btn-outline-primary:hover {
+  background-color: #f4893c;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: #f97a20;
+  color: #ffffff;
+}
+
+.faPenSquare {
+  margin-right: 20px;
+}
+.faPenSquare,
+.faTrashCan {
+  color: #f28d44;
+  font-size: 20px;
+}
+
+.faPenSquare:hover,
+.faTrashCan:hover {
+  color: #f8700f;
+}
+.main-container {
+  margin: auto 120px;
+}
+
+.paddingbotton {
+  padding-bottom: 90px;
+}
