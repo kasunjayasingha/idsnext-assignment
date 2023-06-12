@@ -29,28 +29,39 @@ export class CrudOperationComponent implements OnInit {
   }
 
   save(employee: any) {
-    const selectedDesignationId = employee.designation; // Get the selected employee category
+    const selectedDesignationId = employee.designation;
+
     this.designations$.subscribe((designations) => {
       const selectedDesignation = designations.find(
         (c) => c.$key === selectedDesignationId
-      )?.$key;
-      const newEmployee: any = {
-        // Update the type to 'string | null'
+      )?.name;
+
+      const updatedEmployee: any = {
         name: employee.name,
         designation: selectedDesignation,
         salary: employee.salary,
-        key: null, // Initialize key property to null
       };
-      this.employeeService
-        .create(newEmployee)
-        .then((key: string | null) => {
-          newEmployee.key = key; // Assign the key returned by the create method
-          console.log('New employee key:', key);
-          // Rest of your code
-        })
-        .catch((error) => {
-          console.error('Error creating employee:', error);
-        });
+
+      if (this.editMode) {
+        this.employeeService
+          .update(this.editIndex, updatedEmployee)
+          .then(() => {
+            console.log('Employee updated successfully');
+            this.editMode = false;
+          })
+          .catch((error) => {
+            console.error('Error updating employee:', error);
+          });
+      } else {
+        this.employeeService
+          .create(updatedEmployee)
+          .then((key: string | null) => {
+            console.log('New employee key:', key);
+          })
+          .catch((error) => {
+            console.error('Error creating employee:', error);
+          });
+      }
     });
   }
 
@@ -58,8 +69,12 @@ export class CrudOperationComponent implements OnInit {
   @ViewChild('designation') designation: ElementRef | undefined;
   @ViewChild('salary') salary: ElementRef | undefined;
 
+  editMode: boolean = false;
+  editIndex: any;
+
   onEditEmployee(id: any) {
-    console.log('Edit employee:', id);
+    this.editMode = true;
+    this.editIndex = id;
     this.employeeService
       .getEmployeeByKey(id)
       .valueChanges()
@@ -80,6 +95,23 @@ export class CrudOperationComponent implements OnInit {
           this.salary.nativeElement.value = this.employee.salary;
         }
       });
+  }
+
+  onResetClick() {
+    this.editMode = false;
+  }
+
+  onDeleteEmployee(key: string) {
+    if (confirm('Are you sure you want to delete this employee?')) {
+      this.employeeService
+        .delete(key)
+        .then(() => {
+          console.log('Employee deleted successfully');
+        })
+        .catch((error) => {
+          console.error('Error deleting employee:', error);
+        });
+    }
   }
   // console.log('Edit employee:', id);
   // console.log('Edit employee:', this.employee[id]);

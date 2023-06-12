@@ -40,4 +40,22 @@ export class EmployeeService {
   getEmployeeByKey(key: string): AngularFireObject<any> {
     return this.db.object(`/employees/${key}`);
   }
+
+  update(key: string, employee: any): Promise<void> {
+    if (key) {
+      const employeeRef = this.db.object(`/employees/${key}`);
+      return employeeRef.update(employee);
+    } else {
+      return Promise.reject(new Error('Invalid employee key'));
+    }
+  }
+
+  delete(key: string): Promise<void> {
+    if (key) {
+      const employeeRef = this.db.object(`/employees/${key}`);
+      return employeeRef.remove();
+    } else {
+      return Promise.reject(new Error('Invalid employee key'));
+    }
+  }
 }

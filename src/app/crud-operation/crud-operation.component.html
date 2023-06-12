@@ -61,10 +61,16 @@
           </div>
         </div>
         <div class="btngroup">
-          <button type="reset" class="btn btn-outline-primary btnSave">
+          <button
+            (click)="onResetClick()"
+            type="reset"
+            class="btn btn-outline-primary btnSave"
+          >
             Reset
           </button>
-          <button class="btn btn-primary btnSave">Save</button>
+          <button class="btn btn-primary btnSave">
+            {{ editMode ? "Update" : "Save" }}
+          </button>
         </div>
       </form>
     </div>
@@ -90,7 +96,7 @@
                   [routerLink]="['/crud-operation/', p.key]"
                   ><fa-icon [icon]="faPenSquare" class="faPenSquare"></fa-icon
                 ></a>
-                <a [routerLink]="['/', p.key]"
+                <a (click)="onDeleteEmployee(p.key)" [routerLink]="['/', p.key]"
                   ><fa-icon [icon]="faTrashCan" class="faTrashCan"></fa-icon
                 ></a>
               </td>
